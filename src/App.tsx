@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './components/ui/table';
 import { Button } from './components/ui/button';
 import { tabsMock } from './chrome/tabsMock';
-import { FocusIcon, Trash2Icon } from 'lucide-react';
+import { FocusIcon, Trash2Icon, SearchIcon } from 'lucide-react';
 
 interface Tab {
   id: number;
@@ -42,6 +42,7 @@ const processTabs = (tabs: Tab[]): TabsBanana[] => {
 
 function App() {
   const [tabs, setTabs] = useState<TabsBanana[]>([])
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
   const updateTabs = async () => {
     // @ts-ignore
@@ -80,6 +81,15 @@ function App() {
     updateTabs();
   }
 
+  const filteredTabs = tabs.filter((tab) => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      tab.title.toLowerCase().includes(query) ||
+      tab.url.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <div className="w-full h-full p-3">
       <h1>Tabs</h1>
@@ -87,6 +97,24 @@ function App() {
         <Button onClick={updateTabs}>
           count is {tabs.length}
         </Button>
+      </div>
+
+      <div className="my-4">
+        <div className="relative">
+          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <input
+            type="text"
+            placeholder="Search tabs by title or URL..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        {searchQuery && (
+          <p className="text-sm text-gray-600 mt-2">
+            Showing {filteredTabs.length} of {tabs.length} tabs
+          </p>
+        )}
       </div>
 
       <Table>
@@ -101,7 +129,7 @@ function App() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tabs.map((tab) => (
+        {filteredTabs.map((tab) => (
           <TableRow key={tab.id}>
             <TableCell className="flex gap-2">
               <Button onClick={() => handleOnRemoveTab(tab)}>
@@ -127,7 +155,7 @@ function App() {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total Tabs</TableCell>
-          <TableCell className="text-right">{tabs.length}</TableCell>
+          <TableCell className="text-right">{filteredTabs.length}/{tabs.length}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>
