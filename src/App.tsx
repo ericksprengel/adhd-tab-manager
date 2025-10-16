@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './components/ui/table';
 import { Button } from './components/ui/button';
 import { tabsMock } from './chrome/tabsMock';
-import { FocusIcon, Trash2Icon, SearchIcon } from 'lucide-react';
+import { FocusIcon, Trash2Icon, SearchIcon, RefreshCwIcon } from 'lucide-react';
 
 interface Tab {
   id: number;
@@ -94,8 +94,9 @@ function App() {
     <div className="w-full h-full p-3">
       <h1>Tabs</h1>
       <div className="card">
-        <Button onClick={updateTabs}>
-          count is {tabs.length}
+        <Button onClick={updateTabs} variant="outline" >
+          <RefreshCwIcon className="mr-2 h-4 w-4" />
+          Refresh
         </Button>
       </div>
 
