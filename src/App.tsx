@@ -119,7 +119,6 @@ function App() {
       </div>
 
       <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Action</TableHead>
@@ -159,6 +158,7 @@ function App() {
           <TableCell className="text-right">{filteredTabs.length}/{tabs.length}</TableCell>
         </TableRow>
       </TableFooter>
+      <TableCaption>TDAH Tab Manager made with 🍌 by <a href="https://github.com/sprengel" target="_blank" rel="noopener noreferrer">ericksprengel</a></TableCaption>
     </Table>
     </div>
   )
