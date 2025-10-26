@@ -1,8 +1,12 @@
 {
-  "name": "EMS Chrome Tabs",
-  "description": "Tab managar for TDAH users",
+  "name": "ADHD Tab Manager",
+  "description": "Tab managar for ADHD users",
   "version": "1.0",
   "manifest_version": 3,
+  "icons": {
+    "48": "adhd_tab_manager_icon.png",
+    "128": "adhd_tab_manager_icon.png"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": "hello_extensions.png"

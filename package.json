@@ -1,5 +1,5 @@
 {
-  "name": "chrome_tabs",
+  "name": "adhd-tab-manager",
   "private": true,
   "version": "0.0.0",
   "type": "module",
