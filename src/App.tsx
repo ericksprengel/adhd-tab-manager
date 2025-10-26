@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './components/ui/table';
 import { Button } from './components/ui/button';
 import { tabsMock } from './chrome/tabsMock';
@@ -43,6 +43,7 @@ const processTabs = (tabs: Tab[]): TabsBanana[] => {
 function App() {
   const [tabs, setTabs] = useState<TabsBanana[]>([])
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   const updateTabs = async () => {
     // @ts-ignore
@@ -61,6 +62,10 @@ function App() {
 
   useEffect(() => {
     updateTabs();
+    // Focus the search input when the component mounts
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
   }, []);
 
   const handleOnRemoveTab = async (tab: TabsBanana) => {
@@ -104,6 +109,7 @@ function App() {
         <div className="relative">
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <input
+            ref={searchInputRef}
             type="text"
             placeholder="Search tabs by title or URL..."
             value={searchQuery}
@@ -154,7 +160,7 @@ function App() {
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total Tabs</TableCell>
+          <TableCell colSpan={4}>Total Tabs</TableCell>
           <TableCell className="text-right">{filteredTabs.length}/{tabs.length}</TableCell>
         </TableRow>
       </TableFooter>
