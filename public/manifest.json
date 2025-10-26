@@ -9,7 +9,19 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_icon": "hello_extensions.png"
+    "default_icon": "adhd_tab_manager_icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "open-adhd-tab-manager": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Open ADHD Tab Manager"
+    }
   },
   "permissions": [
     "tabs"
