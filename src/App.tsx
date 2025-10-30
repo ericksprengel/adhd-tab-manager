@@ -97,16 +97,8 @@ function App() {
 
   return (
     <div className="w-full h-full p-3">
-      <h1>Tabs</h1>
-      <div className="card">
-        <Button onClick={updateTabs} variant="outline" >
-          <RefreshCwIcon className="mr-2 h-4 w-4" />
-          Refresh
-        </Button>
-      </div>
-
-      <div className="my-4">
-        <div className="relative">
+      <div className="my-4 flex gap-4 items-center">
+        <div className="relative flex-1">
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <input
             ref={searchInputRef}
@@ -122,6 +114,11 @@ function App() {
             Showing {filteredTabs.length} of {tabs.length} tabs
           </p>
         )}
+
+        <Button onClick={updateTabs} variant="default" className="flex items-center">
+          <RefreshCwIcon className="mr-2 h-4 w-4" />
+          Refresh
+        </Button>
       </div>
 
       <Table>
@@ -136,7 +133,7 @@ function App() {
       </TableHeader>
       <TableBody>
         {filteredTabs.map((tab) => (
-          <TableRow key={tab.id}>
+          <TableRow key={tab.id} highlight={tab.active}>
             <TableCell className="flex gap-2">
               <Button onClick={() => handleOnRemoveTab(tab)}>
                 <Trash2Icon />

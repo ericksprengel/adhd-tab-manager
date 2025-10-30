@@ -50,13 +50,14 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+function TableRow({ className, highlight = false, ...props }: React.ComponentProps<"tr"> & { highlight?: boolean }) {
   return (
     <tr
       data-slot="table-row"
       className={cn(
         "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
-        className
+        className,
+        highlight ? "bg-blue-200 hover:bg-blue-200/50" : "",
       )}
       {...props}
     />
