@@ -7,8 +7,8 @@
     "48": "adhd_tab_manager_icon.png",
     "128": "adhd_tab_manager_icon.png"
   },
-  "action": {
-    "default_popup": "index.html",
+  "side_panel": {
+    "default_path": "index.html",
     "default_icon": "adhd_tab_manager_icon.png"
   },
   "background": {
@@ -24,6 +24,7 @@
     }
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "sidePanel"
   ]
 }
